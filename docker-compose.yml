@@ -1,0 +1,45 @@
+version: "3"
+services:
+  api:
+    build:
+      context: ./fast-backend
+      dockerfile: Dockerfile
+    container_name: fastapi-rnd-api
+    image: fastapi-rnd-api
+    restart: unless-stopped
+    environment:
+      - DB_URL=${DB_URL}
+    depends_on:
+      - db
+    ports:
+      - 8001:80
+    networks:
+      - rnd-network
+  db:
+    image: mongo:latest
+    container_name: mongo-db
+    volumes:
+      - mongo_db_volume:/data/db
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    networks:
+      - rnd-network
+  db-gui:
+    image: mongo-express:latest
+    container_name: mongo-db-gui
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=db # Here db is the mongo service name
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+      - api
+    networks:
+      - rnd-network
+    restart: unless-stopped
+volumes:
+  mongo_db_volume:
+networks:
+  rnd-network:
