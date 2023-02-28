@@ -1,0 +1,43 @@
+.insite_small_card__wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.insite_small_card {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e4eff2;
+  box-shadow: -2px 20px 56px rgba(0, 47, 102, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.insite_small_card_button {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  :nth-child(1) {
+    margin-right: 15px;
+  }
+}
+
+.tag {
+  display: flex;
+  width: 103px;
+  height: 25.06px;
+  background: #ff6464;
+  border-radius: 20px;
+  color: #ffffff;
+  font-size: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tag_text {
+  display: flex;
+  margin: auto;
+}
