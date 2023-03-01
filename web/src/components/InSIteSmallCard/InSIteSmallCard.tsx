@@ -68,7 +68,9 @@ const InSIteSmallCard: FunctionComponent<InSIteSmallCardProps> = ({
             {type === "content" && contentDiv}
           </div>
           <div className="insite_small_card_button">
-            <Button variant="contained">Pay</Button>
+            <Button variant="contained" onClick={activeBtnFn}>
+              Pay
+            </Button>
           </div>
         </div>
       </div>
