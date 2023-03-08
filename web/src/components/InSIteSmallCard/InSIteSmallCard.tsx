@@ -4,6 +4,7 @@ import "./InSIteSmallCard.scss";
 import DoneIcon from "@mui/icons-material/Done";
 
 interface InSIteSmallCardProps {
+  id: string;
   title: string;
   subTitle: string;
   contentArray?: any;
@@ -16,6 +17,7 @@ interface InSIteSmallCardProps {
 }
 
 const InSIteSmallCard: FunctionComponent<InSIteSmallCardProps> = ({
+  id,
   title,
   subTitle,
   contentArray,
@@ -27,54 +29,52 @@ const InSIteSmallCard: FunctionComponent<InSIteSmallCardProps> = ({
   type,
 }) => {
   return (
-    <React.Fragment>
-      <div className="insite_small_card__wrapper">
-        <div className="insite_small_card">
-          <div className="insite_small_card_content">
-            {tag === true && (
-              <div className="tag">
-                <div className="tag_text">Most Popular!</div>
-              </div>
-            )}
-            <Typography>{title}</Typography>
-            <Typography style={{ marginTop: "10px", marginBottom: "15px" }}>
-              {subTitle}
-            </Typography>
-            {type === "regular" && (
-              <div style={{ marginBottom: "15px" }}>
-                {contentArray &&
-                  contentArray.map((content: string, index: number) => {
-                    return (
-                      <div
-                        key={title + "_" + index}
+    <div className="insite_small_card__wrapper">
+      <div className="insite_small_card">
+        <div className="insite_small_card_content">
+          {tag === true && (
+            <div className="tag">
+              <div className="tag_text">Most Popular!</div>
+            </div>
+          )}
+          <Typography>{title}</Typography>
+          <Typography style={{ marginTop: "10px", marginBottom: "15px" }}>
+            {subTitle}
+          </Typography>
+          {type === "regular" && (
+            <div style={{ marginBottom: "15px" }}>
+              {contentArray &&
+                contentArray.map((content: string, index: number) => {
+                  return (
+                    <div
+                      key={title + "_" + index}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <DoneIcon
+                        fontSize="small"
                         style={{
-                          display: "flex",
-                          alignItems: "center",
+                          color: "green",
+                          marginRight: "10px",
                         }}
-                      >
-                        <DoneIcon
-                          fontSize="small"
-                          style={{
-                            color: "green",
-                            marginRight: "10px",
-                          }}
-                        />
-                        <Typography>{content}</Typography>
-                      </div>
-                    );
-                  })}
-              </div>
-            )}
-            {type === "content" && contentDiv}
-          </div>
-          <div className="insite_small_card_button">
-            <Button variant="contained" onClick={activeBtnFn}>
-              Pay
-            </Button>
-          </div>
+                      />
+                      <Typography>{content}</Typography>
+                    </div>
+                  );
+                })}
+            </div>
+          )}
+          {type === "content" && contentDiv}
+        </div>
+        <div className="insite_small_card_button">
+          <Button variant="contained" onClick={activeBtnFn}>
+            Pay
+          </Button>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

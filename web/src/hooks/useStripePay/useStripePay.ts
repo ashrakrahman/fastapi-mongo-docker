@@ -6,16 +6,20 @@ import axios from "axios";
 export default function useStripePay() {
   const [isFetchingStripeData, setIsFetchingStripeData] = useState(false);
 
-  const handlePay = async () => {
+  const handlePay = async (price: any) => {
     try {
       setIsFetchingStripeData(true);
-      const headers = {
-        "Content-Type": "application/json",
+      const data = {
+        price: price,
       };
       const response = await axios.post(
         "http://localhost:8000/create-checkout-session",
-        headers,
-        {}
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       const stripePromise = await loadStripe(response.data.checkout_public_key);
       stripePromise?.redirectToCheckout({

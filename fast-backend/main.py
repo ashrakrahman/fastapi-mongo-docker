@@ -1,5 +1,5 @@
 from typing import Union
-from fastapi import FastAPI
+from fastapi import Body, FastAPI
 from settings import db
 from routers import router_user
 import stripe
@@ -43,17 +43,20 @@ async def read_root():
 
 
 @app.post("/create-checkout-session")
-def create_checkout_session():
+def create_checkout_session(price: str = Body(embed=True)):
     try:
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             line_items=[
                 {
-                    "price": "price_1MgWreKPVJcKwCegV9Afrem4",
+                    "price": price,
                     "quantity": 1,
                 },
             ],
             mode="subscription",
+            automatic_tax={
+                "enabled": True,
+            },
             success_url="http://localhost:3000/payment"
             + "?success=true&session_id={CHECKOUT_SESSION_ID}",
             cancel_url="http://localhost:3000/payment" + "?canceled=true",
